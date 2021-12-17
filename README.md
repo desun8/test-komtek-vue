@@ -1,7 +1,9 @@
-# Vue 3 + Vite
+# Тестовое задание - Учет времени.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+— Админка: отображение списка пользователей, редактирование и добавление новых пользователей
 
-## Recommended IDE Setup
+— Пользователь: отображение списка выполненных задач, удаление и добавление новых задач
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+[Демка](https://modest-kilby-f8ad1c.netlify.app/)
+
+Стек: vue2 + vue-router + vuex
