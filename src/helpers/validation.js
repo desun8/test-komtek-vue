@@ -1,16 +1,8 @@
 export const isValidString = (value) => {
-  console.log(
-    "🚀 ~ file: validation.js ~ line 2 ~ isValidString ~ value",
-    value
-  );
   return value.trim().length > 1;
 };
 
 export const isValidEmail = (value) => {
-  console.log(
-    "🚀 ~ file: validation.js ~ line 7 ~ isValidEmail ~ value",
-    value
-  );
   return (
     value
       .trim()
@@ -21,6 +13,5 @@ export const isValidEmail = (value) => {
 };
 
 export const isValidTime = (value) => {
-  console.log(value.split(":").length);
   return value.split(":").length === 2;
 };

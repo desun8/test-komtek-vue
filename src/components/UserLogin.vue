@@ -52,6 +52,7 @@ export default {
       name="login"
       type="number"
       :required="true"
+      placeholder="id"
       v-model="login"
     ></base-form-input>
     <base-form-buttons

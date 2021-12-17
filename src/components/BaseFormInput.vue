@@ -10,6 +10,10 @@ export default {
       type: String,
       default: "text",
     },
+    placeholder: {
+      type: String,
+      default: "",
+    },
     value: {
       type: Object,
       default: () => ({ value: "", isValid: "" }),
@@ -56,6 +60,7 @@ export default {
       :name="name"
       :required="required"
       :value="value.value"
+      :placeholder="placeholder"
       @input="$emit('input', { value: $event.target.value, isValid: isValid($event.target.value) })"
       class="px-2 py-1 border rounded-md"
       :class="{ 'border-red-600': !value.isValid }"

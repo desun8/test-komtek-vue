@@ -3,9 +3,14 @@ import UserDayReview from "@/components/UserDayReview.vue";
 import { mapGetters } from "vuex";
 import UserButtonAddTask from "@/components/UserButtonAddTask.vue";
 import UserDialogAddTask from "@/components/UserDialogAddTask.vue";
-import BaseTitlePage from '@/components/BaseTitlePage.vue';
+import BaseTitlePage from "@/components/BaseTitlePage.vue";
 export default {
-  components: { UserDayReview, UserButtonAddTask, UserDialogAddTask, BaseTitlePage },
+  components: {
+    UserDayReview,
+    UserButtonAddTask,
+    UserDialogAddTask,
+    BaseTitlePage,
+  },
   props: {
     userId: {
       type: String,
@@ -13,16 +18,12 @@ export default {
     },
   },
 
-  data: () => ({
-    userData: null,
-  }),
+  computed: {
+    ...mapGetters("user", ["getUserById"]),
 
-  computed: { ...mapGetters("user", ["getUserById"]) },
-
-  beforeRouteEnter(_, _2, next) {
-    next((vm) => {
-      vm.userData = vm.getUserById(vm.userId);
-    });
+    userData() {
+      return this.getUserById(this.userId);
+    },
   },
 };
 </script>
