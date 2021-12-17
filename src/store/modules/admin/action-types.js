@@ -1,0 +1,5 @@
+export const updateUser = "updateUser"
+export const addUser = "addUser"
+export const setDialogEditInstance = "setDialogEditInstance"
+export const setDialogAddInstance = "setDialogAddInstance"
+export const setUserId = "setUserId"
