@@ -19,6 +19,7 @@ export default {
     <router-link
       :to="admin"
       v-slot="{ href, navigate, isActive }"
+      custom
     >
       <base-navigation-link
         :href="href"
@@ -32,6 +33,7 @@ export default {
     <router-link
       :to="user"
       v-slot="{ href, navigate, isActive }"
+      custom
     >
       <base-navigation-link
         :href="href"
