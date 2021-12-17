@@ -1,5 +1,5 @@
 <script>
-import { removeUser } from "@/store/modules/user/action-types";
+import { removeTask } from "@/store/modules/user/action-types";
 import { mapActions } from "vuex";
 import BaseButtonRemove from "./BaseButtonRemove.vue";
 export default {
@@ -16,7 +16,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("user", [removeUser]),
+    ...mapActions("user", [removeTask]),
 
     formatDate(date) {
       return date.toLocaleDateString("ru-RU");
@@ -28,7 +28,7 @@ export default {
         taskId: this.task.id,
       };
 
-      this.removeUser(data);
+      this.removeTask(data);
     },
   },
 };

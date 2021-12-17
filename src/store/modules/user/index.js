@@ -1,5 +1,5 @@
 import { vuexError } from "@/helpers/logError";
-import { addTask, removeUser, setDialogInstance } from "./action-types";
+import { addTask, removeTask, setDialogInstance } from "./action-types";
 import { ADD_TASK, REMOVE_USER, SET_DIALOG_INSTANCE } from "./mutation-types";
 
 const staticUserItems = [
@@ -43,10 +43,6 @@ const staticUserData = [
     id: 5,
     items: [...staticUserItems],
   },
-  {
-    id: 6,
-    items: [...staticUserItems],
-  },
 ];
 
 const initialState = {
@@ -55,8 +51,16 @@ const initialState = {
 };
 
 const getters = {
-  getUserById: (state) => (id) => {
-    return state.users.find((user) => user.id === +id);
+  getUserById: (state, _, rootState) => (id) => {
+    const userState = state.users.find((user) => user.id === +id);
+
+    if (userState) return userState;
+
+    const adminState = rootState.admin.users.find((user) => user.id === +id);
+
+    if (adminState) return { id: adminState.id, items: [] };
+
+    return;
   },
   getLastUserId(state) {
     return state.users[state.users.length - 1].id;
@@ -78,15 +82,27 @@ const mutations = {
 };
 
 const actions = {
-  [addTask]({ state, commit }, data) {
+  [addTask]({ state, commit, rootState }, data) {
     const userId = data.userId;
     const task = data.task;
 
     const users = [...state.users];
     const userIndex = users.findIndex((user) => user.id === userId);
 
+    const checkUserInAdmin = (id) => {
+      const userExist = rootState.admin.users.find((user) => user.id === id);
+      return userExist;
+    };
+
     if (userIndex !== -1) {
       users[userIndex].items = [...users[userIndex].items, task];
+
+      commit(ADD_TASK, users);
+    } else if (checkUserInAdmin(userId)) {
+      users.push({
+        id: userId,
+        items: [task],
+      });
 
       commit(ADD_TASK, users);
     } else {
@@ -94,7 +110,7 @@ const actions = {
     }
   },
 
-  [removeUser]({ state, commit }, data = { userId, taskId }) {
+  [removeTask]({ state, commit }, data = { userId, taskId }) {
     const users = [...state.users];
     const userIndex = users.findIndex((user) => user.id === data.userId);
 
@@ -105,7 +121,7 @@ const actions = {
 
       commit(REMOVE_USER, users);
     } else {
-      vuexError(`Actions -> ${removeUser}. Не удалось найти пользователя.`);
+      vuexError(`Actions -> ${removeTask}. Не удалось найти пользователя.`);
     }
   },
 
